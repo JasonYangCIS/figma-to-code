@@ -1,62 +1,44 @@
-import { DemoResponse } from "@shared/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Index() {
-  const [exampleFromServer, setExampleFromServer] = useState("");
-  // Fetch users on component mount
-  useEffect(() => {
-    fetchDemo();
-  }, []);
-
-  // Example of how to fetch data from the server (if needed)
-  const fetchDemo = async () => {
-    try {
-      const response = await fetch("/api/demo");
-      const data = (await response.json()) as DemoResponse;
-      setExampleFromServer(data.message);
-    } catch (error) {
-      console.error("Error fetching hello:", error);
-    }
-  };
+  const [count, setCount] = useState(0);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: FUSION_GENERATION_APP_PLACEHOLDER replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
-          >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-            />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
-        <p className="mt-4 hidden max-w-md">{exampleFromServer}</p>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-6 text-center px-4">
+      <div className="flex items-center gap-6">
+        <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">
+          <img
+            src="https://vitejs.dev/logo.svg"
+            className="h-24 p-4 transition-[filter] hover:drop-shadow-[0_0_2em_#646cffaa]"
+            alt="Vite logo"
+          />
+        </a>
+        <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
+          <img
+            src="https://react.dev/favicon.ico"
+            className="h-24 p-4 transition-[filter] hover:drop-shadow-[0_0_2em_#61dafbaa] animate-[spin_20s_linear_infinite]"
+            alt="React logo"
+          />
+        </a>
       </div>
+
+      <h1 className="text-4xl font-bold">Vite + React</h1>
+
+      <div className="p-8 rounded-lg border border-border">
+        <button
+          onClick={() => setCount((c) => c + 1)}
+          className="rounded-lg border border-transparent px-5 py-2.5 text-base font-medium bg-secondary hover:border-primary transition-colors"
+        >
+          count is {count}
+        </button>
+        <p className="mt-4">
+          Edit <code>client/pages/Index.tsx</code> and save to test HMR
+        </p>
+      </div>
+
+      <p className="text-muted-foreground">
+        Click on the Vite and React logos to learn more
+      </p>
     </div>
   );
 }
